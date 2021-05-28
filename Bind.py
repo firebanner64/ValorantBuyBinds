@@ -1,5 +1,5 @@
 from pynput import keyboard
-from pynput.keyboard import Listener, Controller, Key
+from pynput.keyboard import Listener, Controller, Key, KeyCode
 from pynput.mouse import Button
 from pynput.mouse import Controller as mController
 import time
@@ -11,19 +11,16 @@ _keyboard = Controller()
 _mouse = mController()
 
 def on_release(key):
-    # checks if key has VK, and if the key is in the binds
     
-    #print(key.name)
-    #print(key.value)
-    try:
-        if not (coords := config.binds.get(key.vk, False)):
-            print('not a bind')
-            print(key.vk)
-            return
-    except AttributeError:
-        print("no vk")
-        return
+    #find vk
 
+    coords = config.binds.get(key.vk, False) if isinstance(key, KeyCode) else config.binds.get(key.value.vk, False) 
+
+    print(coords)
+    if not coords:
+        print('not a bind')
+        return
+    
     Buy(scale_res(coords))
 
 
@@ -63,7 +60,7 @@ def is_purchased(scaled_coords: tuple):
     c = get_pixel_color(scaled_coords)
     print(c)
 
-    return c[1] >= 75 # green value greater than 60
+    return c[1] >= 75 # green value greater than 75
 
 def start_listening():
     listener = Listener(on_release=on_release)

@@ -7,8 +7,8 @@ from PIL import ImageGrab
 from colour import Color
 
 mouse = Controller()
-
-#Bind.start_listening()
+print('im hatsune miku')
+Bind.start_listening()
 
 while True:
     print(mouse.position)
