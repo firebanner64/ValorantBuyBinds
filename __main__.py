@@ -12,6 +12,3 @@ while True:
     print(mouse.position)
     time.sleep(0.5)
     
-
-
-

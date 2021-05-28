@@ -22,20 +22,22 @@ def on_release(key):
     except AttributeError as e:
         print("no vk")
         return
-
-    print('acceptable')
-    Buy(coords)
+    
+    Buy(scale_res(coords))
 
 
 def Buy(coords: tuple):
-    print('buying')
     buy_key = keyboard.KeyCode.from_vk(config.buy_menu)
     _keyboard.tap(buy_key)
     time.sleep(0.1)
     _mouse.position = coords
     _mouse.click(Button.left, 1)
     _keyboard.tap(buy_key)
-    
+
+def scale_res(coords: tuple):
+    scale_factor = config.display_res[0] / coords[2]
+    print(round(coords[0] * scale_factor), round(coords[1] * scale_factor))
+    return (round(coords[0] * scale_factor), round(coords[1] * scale_factor))
     
 # Add events
 
