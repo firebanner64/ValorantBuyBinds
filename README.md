@@ -1,2 +1,0 @@
-# ValorantBuyBinds
-Read the title
